@@ -15,37 +15,28 @@
 
            ;; algo
            :algo
-           :name
-           :desc
-           :iterations
 
            ;; constructor functions
            :make-node
            :make-order
            :make-pitstop
            :make-vehicle
-           :make-drawer
 
            ;; predicates
            :node-p
+           :visit-p
            :order-p
            :pitstop-p
            :vehicle-p
-           :drawer-p
 
            ;; accessor functions
            :node-id
            :node-name
-           :node-xcor
-           :node-ycor
            :visit-node-id
            :visit-start
            :visit-end
            :visit-duration
            :order-demand
-           :pitstop-start
-           :pitstop-end
-           :pitstop-duration
 
            :vehicle-id
            :vehicle-route
@@ -73,18 +64,7 @@
            :algo-best-fitness
            :algo-best-iteration
            :algo-current-sol
-           :algo-iterations
-
-           :drawer-min-coord
-           :drawer-max-coord
-           :drawer-legendp
-           :drawer-legend-x
-           :drawer-legend-y
-           :drawer-x-pos
-           :drawer-y-pos
-           :drawer-max-pix
-           :drawer-filename
-           :drawer-plotp))
+           :algo-iterations))
 
 (defpackage :open-vrp.util
   (:use :common-lisp
