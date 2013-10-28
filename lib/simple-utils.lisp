@@ -3,9 +3,6 @@
 ;; Simple utils from Paul Graham's Onlisp
 ;; -------------------------------
 
-(defmacro mac (expr)
-  `(pprint (macroexpand-1 ',expr)))
-
 (defmacro while (test &body body)
   `(do ()
        ((not ,test))
@@ -14,11 +11,6 @@
 (defmacro aif (test-form then-form &optional else-form)
   `(let ((it ,test-form))
      (if it ,then-form ,else-form)))
-
-(defmacro awhile (expr &body body)
-  `(do ((it ,expr ,expr))
-       ((not it))
-     ,@body))
 
 ;; ----------------------------------------------------------
 

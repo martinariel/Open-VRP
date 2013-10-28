@@ -75,11 +75,10 @@
   #+sbcl (:import-from :sb-mop :class-slots :slot-definition-name)
   #+(or allegro clisp lispworks) (:import-from :clos :class-slots :slot-definition-name)
   #+cmu (:import-from :mop :class-slots :slot-definition-name)
-  (:export ;; simple utils
-   :mac
+  (:export
+   ;; simple utils
    :while
    :aif
-   :awhile
    :it
    :copy-object
 
@@ -97,9 +96,7 @@
    :one-destination-p
    :insert-node
    :append-node
-   :remove-node-at
    :remove-node-id
-   :last-visit
    :add-to-unserved
    :remove-from-unserved
 

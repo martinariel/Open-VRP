@@ -5,7 +5,7 @@
 ;;; 0. Route utils
 ;;; 1. Insert node into the route
 ;;; 2. Remove node from the route
-;;; 3. Last location
+;;; 3. Add to unserved list
 ;;; --------------------
 
 ;; 0. Route utils
@@ -48,11 +48,6 @@
 
 ;; 2. Remove Node
 ;; -------------------------
-(defun remove-node-at (veh index)
-  "Removes the <node> from the route of <vehicle> at index"
-  (with-changing-route (r veh)
-    (remove-index index r)))
-
 (defgeneric remove-node-id (veh/prob node-id)
   (:method (vehicle node-id) "Expects <vehicle>/<problem> and int as inputs!")
   (:documentation "Removes the <node> with node-id from the route of <vehicle>. Returns NIL if failed to find node-id. When <problem> is given, remove the node from the first vehicle that holds it (should not occur more than once anyway). Also supports removing from UNSERVED list, if it is held there."))
@@ -71,16 +66,7 @@
        nil))
 ;; ----------------------------
 
-;; 3. Last location
-;; ----------------------------
-(defun last-visit (vehicle)
-  "Returns the last <visit> in its route."
-  (check-type vehicle vehicle)
-  (car (last (vehicle-route vehicle))))
-
-;; ---------------------------
-
-;; 4. Add to unserved list
+;; 3. Add to unserved list
 ;; ----------------------------
 (defun add-to-unserved (prob node-id)
   "Add node-id to the unserved list in problem"
