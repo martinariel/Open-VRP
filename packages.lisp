@@ -24,28 +24,22 @@
            :make-order
            :make-pitstop
            :make-vehicle
-           :make-drawer
 
            ;; predicates
            :node-p
+           :visit-p
            :order-p
            :pitstop-p
            :vehicle-p
-           :drawer-p
 
            ;; accessor functions
            :node-id
            :node-name
-           :node-xcor
-           :node-ycor
            :visit-node-id
            :visit-start
            :visit-end
            :visit-duration
            :order-demand
-           :pitstop-start
-           :pitstop-end
-           :pitstop-duration
 
            :vehicle-id
            :vehicle-route
@@ -73,18 +67,7 @@
            :algo-best-fitness
            :algo-best-iteration
            :algo-current-sol
-           :algo-iterations
-
-           :drawer-min-coord
-           :drawer-max-coord
-           :drawer-legendp
-           :drawer-legend-x
-           :drawer-legend-y
-           :drawer-x-pos
-           :drawer-y-pos
-           :drawer-max-pix
-           :drawer-filename
-           :drawer-plotp))
+           :algo-iterations))
 
 (defpackage :open-vrp.util
   (:use :common-lisp
@@ -95,11 +78,10 @@
   #+sbcl (:import-from :sb-mop :class-slots :slot-definition-name)
   #+(or allegro clisp lispworks) (:import-from :clos :class-slots :slot-definition-name)
   #+cmu (:import-from :mop :class-slots :slot-definition-name)
-  (:export ;; simple utils
-   :mac
+  (:export
+   ;; simple utils
    :while
    :aif
-   :awhile
    :it
    :copy-object
 
@@ -117,9 +99,7 @@
    :one-destination-p
    :insert-node
    :append-node
-   :remove-node-at
    :remove-node-id
-   :last-visit
    :add-to-unserved
    :remove-from-unserved
 
@@ -198,11 +178,12 @@
   (:import-from :alexandria :shuffle :flatten)
   (:export
    ;; tools
-   :get-optimal-insertion
    :fitness-before-after
-   :get-best-insertion-move
-   :get-best-insertion-move-in-vehicle
    :feasible-move-p
+
+   ;; best insertion
+   :get-best-insertion-move-in-vehicle
+   :get-best-insertion-move
 
    ;; conditions
    :no-initial-feasible-solution
@@ -227,8 +208,6 @@
    :make-TS-best-insertion-move
 
    ;; algo-objects
-   :greedy-NN
-   :greedy-append
    :greedy-best-insertion
    :tabu-list
    :tabu-search
@@ -245,15 +224,12 @@
    :ts-stopping-condition
 
    ;; Tabu Search utils
-   :toggle-aspiration
-   :toggle-elite-list
    :add-to-tabu
    :add-move-to-tabu
    :clear-tabu-list
    :is-tabu-p
    :is-tabu-move-p
    :TS-best-insertion-move
-   :create-candidate-list
    :all-moves-tabu))
 
 (defpackage :open-vrp

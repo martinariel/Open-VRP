@@ -35,10 +35,9 @@
     (assert-equal '(:P1 :A3) (route-indices t3))
     (append-node t3 (make-order :node-id :A3B))
     (assert-equal '(:P1 :A3 :A3B) (route-indices t3))
-    (assert-equal :A0 (visit-node-id (last-visit t0)))
-    (remove-node-at t0 0)
+    (remove-node-id t0 :A0)
     (assert-true (no-visits-p (vehicle-route t0)))
-    (remove-node-at t1 1)
+    (remove-node-id t1 :A1)
     (assert-true (one-destination-p (vehicle-route t1)))
     (remove-node-id t2 :A2)
     (assert-equal '(:O5 :O8 :O6) (route-indices t2))
@@ -49,8 +48,7 @@
     (remove-node-id prob :O8)
     (assert-true (no-visits-p (vehicle-route t1)))
     (assert-true (no-visits-p (vehicle-route t3)))
-    (assert-equal '(:O5 :O6) (route-indices t2))
-    (assert-equal :O6 (visit-node-id (last-visit t2)))))
+    (assert-equal '(:O5 :O6) (route-indices t2))))
 
 (define-test unserved-list
   "Test the unserved-list"

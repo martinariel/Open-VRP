@@ -2,7 +2,6 @@
 ;;; ---------------------------
 ;;; 0. Miscellaneous
 ;;; 1. Move feasibility checks
-;;; 2. Heuristical tools
 
 (in-package :open-vrp.algo)
 

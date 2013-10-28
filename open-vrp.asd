@@ -1,6 +1,6 @@
 (defsystem :open-vrp
   :description "Framework for modeling Vehicle Routing Problems"
-  :version "0.8.5"
+  :version "0.9.0"
   :author "mck- <kuomarc2@gmail.com>"
   :licence "LLGPL"
   :depends-on (#:alexandria #:open-vrp-lib)
@@ -12,8 +12,6 @@
                          (:file "iterator")
                          (:file "best-insertion")
                          (:file "greedy-best-insertion")
-                         ;; (:file "greedy-NN")
-                         ;; (:file "greedy-append")
                          (:file "TS-classdef")
                          (:file "TS-utils")
                          (:file "TS")))))

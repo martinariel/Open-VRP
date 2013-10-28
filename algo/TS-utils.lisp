@@ -3,15 +3,6 @@
 
 (in-package :open-vrp.algo)
 
-;; Misc
-;; ---------------------------
-
-;; (defun toggle-aspiration (ts)
-;;   (toggle (ts-aspirationp ts)))
-
-;; (defun toggle-elite-list (ts)
-;;   (toggle (ts-elite-listp ts)))
-
 ;; Tabu List
 ;; -----------------------------
 

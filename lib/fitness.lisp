@@ -10,7 +10,7 @@
 
 (defgeneric fitness (problem)
   (:method (problem) "Parameter is not a <problem> object!")
-  (:documentation "The generic fitness function. To be defined for each class of <problem> specifically. This function allows for custom fitness-functions for your own defined <problem> classess. The default fitness function is total distance."))
+  (:documentation "The generic fitness function. To be defined for each class of <problem> specifically. This function allows for custom fitness-functions for your own defined <problem> classess. The default fitness function is total distance, with penalty for unserved orders."))
 
 (defmethod fitness ((prob problem))
   (if (problem-allow-unserved prob)

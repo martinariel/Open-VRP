@@ -12,9 +12,7 @@
 (defstruct node
   "The super location class, defines a place with optionally x/y coords for plotting"
   (id (gensym) :type symbol :read-only t)
-  (name "Nameless Node" :type string)
-  xcor
-  ycor)
+  (name "Nameless Node" :type string))
 
 (defstruct visit
   "These are the actual places on the network that need to be visited, and can be depots, orders, or breaks -- they are linked to a location by node ID"
@@ -76,9 +74,6 @@
    (log-mode :accessor problem-log-mode :initarg :log-mode :initform :repl)))
    ;; log-mode :none = off, :file = output file, :repl = REPL
 
-   ;; @mck- Oct 2, 2013 -- does not belong here
-   ;; (drawer :accessor problem-drawer :initarg :drawer :initform nil)
-
 (defclass CVRP (problem)
   ((name :initform "CVRP")
    (desc :initform "Capacitated Vehicle Routing Problem")))
@@ -93,22 +88,6 @@
 
 ;; ----------------------
 
-;; The drawing object class
-;; --------------------------------
-(defstruct drawer
-  min-coord
-  max-coord
-  (x-pos 0)
-  (y-pos 0)
-  (max-pix 1000)
-  (legendp T)
-  (legend-x 100)
-  (legend-y 900)
-  filename
-  (plotp nil))
-
-;; -----------------------------
-
 ;; Algo class
 ;; -----------------------
 
@@ -120,4 +99,3 @@
    (best-iteration :accessor algo-best-iteration :initform 0)
    (current-sol :accessor algo-current-sol :initarg :current-sol :initform nil)
    (iterations :accessor algo-iterations :initarg :iterations)))
-   ;; (animatep :accessor algo-animatep :initarg :animatep :initform nil)))
