@@ -1,10 +1,12 @@
-;;; Fleet related functions
+`;;; Fleet related functions
 ;;; ---------------------------
-;;; - route-indices (<vehicle>/<problem>) - returns list of node IDs
-;;; - vehicle-with-node-id	(<Problem> int)   - returns <vehicle> that has the node-ID
-;;; - total-dist (<vehicle>/<problem>)    - returns the total distance
-;;; - vehicle (<problem> int)             - returns <Vehicle> with id
-;;; - new-vehicle                         - macro that creates a <Vehicle> according to input
+;;; - route-indices (<vehicle>/<problem>)      - returns list of node IDs
+;;; - vehicle-with-node-id (<Problem> keyword) - returns <vehicle> that has the node-ID
+;;; - route-dist (<vehicle> dist-matrix)       - returns the total distance given <vehicle>
+;;; - total-dist (<problem>)                   - returns the total distance given <Problem>
+;;; - veh-arrival-times (<vehicle> dist-matrix)- returns list of arrival times along route
+;;; - arrival-times (<problem>)                - returns list of lists of arrival times
+;;; - vehicle (<problem> keyword)              - returns <Vehicle> with id
 
 (in-package :open-vrp.util)
 

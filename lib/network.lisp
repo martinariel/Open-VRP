@@ -1,12 +1,6 @@
-;;; Utilities for generating a distance table using a list of node coords.
-;;; -----------------------------------------
-;;; - distance (int int array)		- Expects two node-IDs and a dist-array
-;;; - node (<Problem> int)		- Returns <Node> given a <Problem> and a node-id
-;;; - new-node				- Macro that creates a <Node> according to input
 ;;; -----------------------------------------
 ;;; Distance matrix data-structure: Hash-table of hash-tables
 ;;; -----------------------------------------
-;;;
 
 (in-package :open-vrp.util)
 ;(proclaim '(optimize (speed 3)))
