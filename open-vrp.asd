@@ -12,8 +12,6 @@
                          (:file "iterator")
                          (:file "best-insertion")
                          (:file "greedy-best-insertion")
-                         ;; (:file "greedy-NN")
-                         ;; (:file "greedy-append")
                          (:file "TS-classdef")
                          (:file "TS-utils")
                          (:file "TS")))))

@@ -15,6 +15,9 @@
 
            ;; algo
            :algo
+           :name
+           :desc
+           :iterations
 
            ;; constructor functions
            :make-node
@@ -175,11 +178,12 @@
   (:import-from :alexandria :shuffle :flatten)
   (:export
    ;; tools
-   :get-optimal-insertion
    :fitness-before-after
-   :get-best-insertion-move
-   :get-best-insertion-move-in-vehicle
    :feasible-move-p
+
+   ;; best insertion
+   :get-best-insertion-move-in-vehicle
+   :get-best-insertion-move
 
    ;; conditions
    :no-initial-feasible-solution
@@ -204,8 +208,6 @@
    :make-TS-best-insertion-move
 
    ;; algo-objects
-   :greedy-NN
-   :greedy-append
    :greedy-best-insertion
    :tabu-list
    :tabu-search
@@ -222,15 +224,12 @@
    :ts-stopping-condition
 
    ;; Tabu Search utils
-   :toggle-aspiration
-   :toggle-elite-list
    :add-to-tabu
    :add-move-to-tabu
    :clear-tabu-list
    :is-tabu-p
    :is-tabu-move-p
    :TS-best-insertion-move
-   :create-candidate-list
    :all-moves-tabu))
 
 (defpackage :open-vrp

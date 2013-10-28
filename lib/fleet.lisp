@@ -1,4 +1,4 @@
-`;;; Fleet related functions
+;;; Fleet related functions
 ;;; ---------------------------
 ;;; - route-indices (<vehicle>/<problem>)      - returns list of node IDs
 ;;; - vehicle-with-node-id (<Problem> keyword) - returns <vehicle> that has the node-ID
