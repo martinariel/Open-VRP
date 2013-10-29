@@ -118,8 +118,8 @@
    :route-dist
    :total-dist
    :vehicle
-   :veh-arrival-times
-   :arrival-times
+   :veh-route-times
+   :route-times
 
    ;; time utils
    :time-to-minutes
@@ -248,7 +248,7 @@
            :print-routes
 
            ;; utils
-           :arrival-times
+           :route-times
            :route-indices
            :algo-best-sol
 

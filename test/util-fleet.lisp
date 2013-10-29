@@ -72,3 +72,28 @@
     (assert-error 'simple-type-error (route-dist t1 "hello"))
     (assert-equal 18.4 (fitness prob))
     (assert-equal 18.4 (total-dist prob))))
+
+(define-test get-times
+  "Test the route-times util"
+  (:tag :fleet)
+  (let* ((t1 (make-vehicle :id :1 :start-location :D1 :end-location :D2
+                           :route (list (make-order :node-id :O1)
+                                        (make-order :node-id :O2)
+                                        (make-order :node-id :O3))))
+         (t2 (make-vehicle :id :2 :start-location :D1 :end-location :D1 :shift-start 10
+                           :route (list (make-order :node-id :O5 :duration 5)
+                                        (make-order :node-id :O8 :duration 3)
+                                        (make-order :node-id :O6 :duration 1))))
+         (dist (alist-to-hash '((:D1 (:O1 . 1.5) (:O5 . 2.5))
+                                (:O1 (:O2 . 2))
+                                (:O2 (:O3 . 3))
+                                (:O3 (:D2 . 1.2))
+                                (:O5 (:O8 . 1))
+                                (:O8 (:O6 . 5))
+                                (:O6 (:D1 . 2.2)))))
+         (prob (make-instance 'problem :fleet (list t1 t2) :dist-matrix dist)))
+    (assert-equal '((0) (1.5 . 1.5) (3.5 . 3.5) (6.5 . 6.5) (7.7)) (open-vrp.util:veh-route-times t1 dist))
+    (assert-equal '((10) (12.5 . 17.5) (18.5 . 21.5) (26.5 . 27.5) (29.7)) (open-vrp.util:veh-route-times t2 dist))
+    (assert-equal '(((0) (1.5 . 1.5) (3.5 . 3.5) (6.5 . 6.5) (7.7))
+                    ((10) (12.5 . 17.5) (18.5 . 21.5) (26.5 . 27.5) (29.7)))
+                  (open-vrp.util:route-times prob))))

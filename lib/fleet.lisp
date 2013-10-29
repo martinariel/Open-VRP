@@ -4,8 +4,8 @@
 ;;; - vehicle-with-node-id (<Problem> keyword) - returns <vehicle> that has the node-ID
 ;;; - route-dist (<vehicle> dist-matrix)       - returns the total distance given <vehicle>
 ;;; - total-dist (<problem>)                   - returns the total distance given <Problem>
-;;; - veh-arrival-times (<vehicle> dist-matrix)- returns list of arrival times along route
-;;; - arrival-times (<problem>)                - returns list of lists of arrival times
+;;; - veh-route-times (<vehicle> dist-matrix)- returns list of arrival times along route
+;;; - route-times (<problem>)                - returns list of lists of arrival times
 ;;; - vehicle (<problem> keyword)              - returns <Vehicle> with id
 
 (in-package :open-vrp.util)
@@ -64,26 +64,27 @@
   "Returns total distance of all routes combined. Includes to and from start and end locations."
   (loop for v in (get-busy-vehicles problem) sum (route-dist v (problem-dist-matrix problem))))
 
-(defun veh-arrival-times (veh dist-matrix)
+(defun veh-route-times (veh dist-matrix)
   "Returns arrival times at each node along a vehicle's route"
-  (let ((times (list (vehicle-shift-start veh))))
+  (let ((times (list (cons (vehicle-shift-start veh) nil))))
     (labels ((iter (route time loc)
                (if (null route) (nreverse
                                  (push
-                                  (+ time (travel-time loc (vehicle-end-location veh) dist-matrix :speed (vehicle-speed veh)))
+                                  (cons (+ time (travel-time loc (vehicle-end-location veh) dist-matrix :speed (vehicle-speed veh))) nil)
                                   times))
-                   (let ((arr-time (+ time (travel-time loc (visit-node-id (car route)) dist-matrix :speed (vehicle-speed veh)))))
-                     (push arr-time times)
+                   (let* ((arr-time (+ time (travel-time loc (visit-node-id (car route)) dist-matrix :speed (vehicle-speed veh))))
+                          (finish-time (time-after-visit (car route) arr-time)))
+                     (push (cons arr-time finish-time) times)
                      (iter (cdr route)
-                           (time-after-visit (car route) arr-time)
+                           finish-time
                            (visit-node-id (car route)))))))
       (iter (vehicle-route veh)
             (vehicle-shift-start veh)
             (vehicle-start-location veh)))))
 
-(defun arrival-times (sol)
+(defun route-times (sol)
   "Given a solution, return a list of lists of arrival times."
-  (mapcar #'(lambda (v) (veh-arrival-times v (problem-dist-matrix sol)))
+  (mapcar #'(lambda (v) (veh-route-times v (problem-dist-matrix sol)))
           (problem-fleet sol)))
 
 ;; Accessor functions
