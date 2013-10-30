@@ -33,7 +33,7 @@
     (assert-equal :UNSERVED (vehicle-with-node-id prob :A))
     (assert-equal :UNSERVED (vehicle-with-node-id prob :B))))
 
-(define-test node-on-route-p
+(define-test node-on-route-p-test
   "Test node-on-route-p util"
   (:tag :fleet)
   (let ((t1 (make-vehicle :id :1 :route (list (make-order :node-id :D1)
@@ -47,7 +47,7 @@
     (assert-error 'simple-type-error (node-on-route-p 1 t1))
     (assert-error 'simple-type-error (node-on-route-p :D2 "hello"))))
 
-(define-test total-dist
+(define-test total-dist-test
   "Test route-dist and total-dist util, which calculates the total distance of a single vehicle and of the entire fleet respectively."
   (:tag :fleet)
   (let* ((t1 (make-vehicle :id :1 :start-location :D1 :end-location :D2

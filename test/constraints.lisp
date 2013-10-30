@@ -35,7 +35,7 @@
 ;; Time Windows
 ;; --------------------------------
 
-(define-test time-after-visit
+(define-test time-after-visit-test
   "Test the time-after-visit util"
   (:tag :constraints)
   (assert-equal 8 (time-after-visit (make-order :start 5 :end 10 :duration 1) 7))

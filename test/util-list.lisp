@@ -3,7 +3,7 @@
 ;; Simple list utils
 ;; --------------------
 
-(define-test get-min-index
+(define-test get-min-index-test
   "Test the get-min-index util"
   (:tag :util)
   (assert-equal 3 (get-min-index '(0 2 3 -5 1)))
@@ -13,7 +13,7 @@
                            (get-min-index '(nil 10 nil 203948 3 1))
                          (list i val))))
 
-(define-test get-max-index
+(define-test get-max-index-test
   "Test the get-max-index util"
   (:tag :util)
   (assert-equal 2 (get-max-index '(0 2 3 -5 1)))
@@ -23,7 +23,7 @@
                                 (get-max-index '(nil 10 nil 203948 3 1))
                               (list i val))))
 
-(define-test insert-before
+(define-test insert-before-test
   "Test insert-before util, with edge cases and index out of bound errors"
   (:tag :util)
   (assert-equal '(1 2 3) (insert-before 2 1 '(1 3)))
@@ -34,7 +34,7 @@
   (assert-error 'index-out-of-bounds (insert-before 2 3 '(1 3)))
   (assert-equal '(1 "hello" 2) (insert-before "hello" 1 '(1 2))))
 
-(define-test insert-at-end
+(define-test insert-at-end-test
   "Test insert-at-end util"
   (:tag :util)
   (assert-equal '(1 2 3) (insert-at-end 3 '(1 2)))
@@ -42,7 +42,7 @@
   (assert-equal '(1) (insert-at-end 1 '()))
   (assert-equal '(1 2 3 "hello") (insert-at-end "hello" '(1 2 3))))
 
-(define-test remove-index
+(define-test remove-index-test
   "Test remove index with edge cases"
   (:tag :util)
   (assert-equal '(1 2 3) (remove-index 3 '(1 2 3 4)))

@@ -3,7 +3,7 @@
 ;; Greedy best insertion algo
 ;; --------------------
 
-(define-test greedy-best-insertion
+(define-test greedy-best-insertion-test
   (:tag :greedy)
   "Test greedy-best-insertion algorithm to generate initial feasible solutions"
   (let* ((o1 (make-order :duration 1 :start 0 :end 11 :node-id :o1 :demand 1))
@@ -27,7 +27,7 @@
          (cvrp (make-instance 'cvrp :fleet (list t1 t2)
                               :dist-matrix dist
                               :visits {:o1 o1 :o2 o2 :o3 o3 :o4 o4 :o5 o5}))
-         (vrptw (make-instance 'vrptw :fleet (list t1 t2)
+         (vrptw (make-instance 'vrptw :fleet (list t1 t2) :allow-unserved nil
                                :dist-matrix dist
                                :visits {:o1 o1 :o2 o2 :o3 o3 :o4 o4 :o5 o5}))
          (cvrptw (make-instance 'cvrptw :fleet (list t3)
