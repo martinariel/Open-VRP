@@ -81,15 +81,15 @@
                        (route (route-indices veh))
                        (pos (position node-id route))
                        (node-before (if (= pos 0) (vehicle-start-location veh) (nth (1- pos) route)))
-                       (dist-before (get-distance node-before node-id dist-matrix)))
+                       (dist-before (distance node-before node-id dist-matrix)))
                   (setf fitness
                         (- (insertion-cost vehicle-id node-id)
                            ;save by removing:
                            (let ((node-after (nth (1+ pos) route)))
                              (- (+ dist-before
-                                   (get-distance node-id node-after dist-matrix)) ;dist to next node
+                                   (distance node-id node-after dist-matrix)) ;dist to next node
                                 ;minus direct route, which is 0 if the node-before and node-after are the same.
-                                (handler-case (get-distance node-before node-after dist-matrix)
+                                (handler-case (distance node-before node-after dist-matrix)
                                   (same-origin-destination () 0))))))))
           (no-feasible-move () (setf fitness nil))))))) ;when no feasible-moves exist, set fitness nil
 
