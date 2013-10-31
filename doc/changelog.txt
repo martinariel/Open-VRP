@@ -1,3 +1,11 @@
+v. 0.9.1
+
+ - Major rearchitecture of Open-VRP
+ - Unit test everything
+ - Include shift constraints
+ - Use of hash-tables with keyword ids
+ - Removed all extra utilities, such as drawing/plotting
+
 v. 0.6.3
 
 Other:
@@ -15,7 +23,7 @@ v. 0.6.1
 Features:
 
  - Generic input file reader (used by batch-run)
- 
+
 Other:
 
  - logging in a directory by name of problem
@@ -39,7 +47,7 @@ Other:
  - change function name load-testcase-solomon to load-solomon-vrp-file
  - Amalgamated config functions under config-functions.lisp
  - changed log-mode method to log-to-replp, since that was its only usage -- DRYer code
- 
+
 v. 0.5.1
 
  - Performance increase by 67% (see issue #19)
