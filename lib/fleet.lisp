@@ -29,7 +29,7 @@
   "Returns NIL if <vehicle> does not have the node on its route."
   (check-type node-id symbol)
   (check-type vehicle vehicle)
-  (find node-id (vehicle-route vehicle) :key #'visit-node-id))
+  (member node-id (vehicle-route vehicle) :key #'visit-node-id))
 
 (defun vehicle-with-node-id (prob node-id)
   "Given a node-id, return the vehicle-id that has the node in its route. Returns NIL if node-id cannot be found. Assumes only 1 presence of a node in the problem. When allow-unserved is T, also search the unserved slot in problem, and return :UNSERVED if it is found there."
