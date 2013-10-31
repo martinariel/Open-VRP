@@ -3,7 +3,7 @@
 ;;; -----------------------------------------
 
 (in-package :open-vrp.util)
-;(proclaim '(optimize (speed 3)))
+(declaim (optimize speed))
 
 (defun sethash (key val hash-table)
   "Setter for hash-table"
@@ -24,18 +24,13 @@
   (check-type from symbol)
   (check-type to symbol)
   (check-type dist-matrix hash-table)
-  (when (eq from to) (error 'same-origin-destination :from from :to to))
-  (let ((row (gethash from dist-matrix)))
-    (unless row (error 'distance-between-nodes-undefined :from from :to to))
-    (check-type row hash-table)
-    (aif (gethash to row)
-         it
-         (error 'distance-between-nodes-undefined :from from :to to))))
-
-(defun get-distance (from-id to-id matrix)
-  "Helper to distance, which will return distance 0 for same from and to condition"
-  (handler-case (distance from-id to-id matrix)
-    (same-origin-destination () 0)))
+  (if (eq from to) 0
+      (let ((row (gethash from dist-matrix)))
+        (unless row (error 'distance-between-nodes-undefined :from from :to to))
+        (check-type row hash-table)
+        (aif (gethash to row)
+             it
+             (error 'distance-between-nodes-undefined :from from :to to)))))
 
 ;; -------------------------
 

@@ -1,6 +1,7 @@
 ;;; Functions to operate on routes, which are a list of <node> objects
 ;;; contained in a <vehicle>'s :route slot.
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 ;;; -------
 ;;; 0. Route utils
 ;;; 1. Insert node into the route

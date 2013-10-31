@@ -2,6 +2,7 @@
 ;; ---------------------------------------
 ;; - it is possible to define your own moves and initial solution heuristic.
 (in-package :open-vrp.algo)
+(declaim (optimize speed))
 
 ;; Queue data structure for Tabu List -- source: http://rosettacode.org/wiki/FIFO#Common_Lisp
 ;; ------------------

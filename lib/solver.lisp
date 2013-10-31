@@ -10,6 +10,7 @@
 ;;; - iterate-more (<algo> int)          - reset number of iterations and call run-algo
 ;;; ----------------------------
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 (defparameter *start-time* nil)
 (defparameter *finish-time* nil)

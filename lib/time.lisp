@@ -1,4 +1,5 @@
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 ;; Time library
 ;; --------------------

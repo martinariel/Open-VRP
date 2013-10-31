@@ -22,7 +22,7 @@
 ;; Feasible move-p
 ;; --------------------
 
-(define-test feasible-move-p
+(define-test feasible-move-p-test
   (:tag :algo)
   "Test feasible-move-p predicate"
     (let* ((o1 (make-order :node-id :1 :demand 2))

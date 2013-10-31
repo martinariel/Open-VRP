@@ -3,7 +3,7 @@
 ;; Tabu Search Utils tests
 ;; --------------------
 
-(define-test tabu-list
+(define-test tabu-list-test
   (:tag :ts-util)
   "Test tabu-list utilities"
   (let ((ts (make-instance 'tabu-search :tabu-tenure 2))
@@ -42,7 +42,7 @@
 ;; Tabu Search Candidate Lists
 ;; --------------------
 
-(define-test candidate-lists
+(define-test candidate-lists-test
   (:tag :ts-util)
   "Test candidate-lists utilities"
   (let* ((ts (make-instance 'tabu-search))
@@ -74,7 +74,7 @@
     (assert-equalp (list (make-insertion-move :fitness -10 :node-id 9))
                    (open-vrp.algo::create-candidate-list ts (sort-moves moves)))))
 
-(define-test remove-affected-moves
+(define-test remove-affected-moves-test
   (:tag :ts-util)
   "Test remove-affected-moves"
   (let* ((o1 (make-order :node-id :1))

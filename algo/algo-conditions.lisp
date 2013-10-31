@@ -1,5 +1,6 @@
 ;; Algo related conditions
 (in-package :open-vrp.algo)
+(declaim (optimize speed))
 
 ;; algo/TS.lisp
 (define-condition all-moves-tabu (error)

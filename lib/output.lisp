@@ -1,6 +1,7 @@
 ;;; Output functions
 ;;; --------------------------
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 (defgeneric print-routes (prob/algo &optional stream)
   (:documentation "Prints solution given a <problem>/<algo> object. Also prints the total distance when the input is a <problem>/<algo> object."))

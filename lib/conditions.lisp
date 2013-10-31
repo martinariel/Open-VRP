@@ -2,6 +2,7 @@
 ;; -------------------------
 
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 ;; lib/lists.lisp
 (define-condition unaccepted-predicate (error)

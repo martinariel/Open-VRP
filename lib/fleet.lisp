@@ -9,6 +9,7 @@
 ;;; - vehicle (<problem> keyword)              - returns <Vehicle> with id
 
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 (defgeneric route-indices (obj)
   (:method (vehicle) "Input is not a <vehicle>/<problem> object!")
@@ -29,21 +30,22 @@
   "Returns NIL if <vehicle> does not have the node on its route."
   (check-type node-id symbol)
   (check-type vehicle vehicle)
-  (find node-id (vehicle-route vehicle) :key #'visit-node-id))
+  (member node-id (vehicle-route vehicle) :key #'visit-node-id))
 
 (defun vehicle-with-node-id (prob node-id)
   "Given a node-id, return the vehicle-id that has the node in its route. Returns NIL if node-id cannot be found. Assumes only 1 presence of a node in the problem. When allow-unserved is T, also search the unserved slot in problem, and return :UNSERVED if it is found there."
   (check-type prob problem)
   (check-type node-id symbol)
-  (or (reduce
-       (lambda (x y)
-         (or x (when (node-on-route-p node-id y)
-                 (vehicle-id y))))
-       (problem-fleet prob)
-       :initial-value nil)
+  (or (labels ((iter (flt)
+                 (cond ((null flt) nil)
+                       ((node-on-route-p node-id (car flt))
+                        (vehicle-id (car flt)))
+                       (t (iter (cdr flt))))))
+        (iter (problem-fleet prob)))
       (when (and (problem-allow-unserved prob)
                  (member node-id (problem-unserved prob)))
         :UNSERVED)))
+
 
 (defun route-dist (veh dist-matrix)
   "Returns total distance of the route(s) given a vehicle. Takes into account the start and end locations of the vehicle."
@@ -53,7 +55,7 @@
              (if (null (cdr togo)) sum
                  (iter (cdr togo)
                        (+ sum
-                          (get-distance (car togo)
+                          (distance (car togo)
                                         (cadr togo)
                                         dist-matrix))))))
     ;; Insert start and end-locations into route
