@@ -5,6 +5,7 @@
 ;; - get-best-insertion-move expects a <solution> object, a node-id and a vehicle-id.
 ;; -----------------------------------------------
 (in-package :open-vrp.algo)
+(declaim (optimize speed))
 
 (defun generate-insertion-moves (sol vehicle-id node-id)
   "Given the <solution> object, vehicle-id and node-id (integers), create all possible insertion-moves, and return them in a list. Avoid generating moves that won't do anything (when doing intra-route insertion)."

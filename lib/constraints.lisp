@@ -5,6 +5,7 @@
 ;;; 2. Time-window Constraints
 ;;; ---------------
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 ;; 0. General tools/definitions
 ;; ----------------------------

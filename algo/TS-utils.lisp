@@ -2,6 +2,7 @@
 ;; ---------------------
 
 (in-package :open-vrp.algo)
+(declaim (optimize speed))
 
 ;; Tabu List
 ;; -----------------------------

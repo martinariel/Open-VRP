@@ -4,6 +4,7 @@
 ;;; 1. Move feasibility checks
 
 (in-package :open-vrp.algo)
+(declaim (optimize speed))
 
 ;; 0. Misc
 ;; -------------------------

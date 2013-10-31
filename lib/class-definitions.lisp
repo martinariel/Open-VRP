@@ -1,6 +1,7 @@
 ;;; All class definitions for CLOS VRP
 ;;; Node, Vehicle, Problem, Drawer and Algo objects
 (in-package :open-vrp.classes)
+(declaim (optimize speed))
 
 ;; Default constants
 (defconstant +min-time+ 0)

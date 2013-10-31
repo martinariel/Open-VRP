@@ -3,7 +3,7 @@
 ;;; -----------------------------------------
 
 (in-package :open-vrp.util)
-;(proclaim '(optimize (speed 3)))
+(declaim (optimize speed))
 
 (defun sethash (key val hash-table)
   "Setter for hash-table"

@@ -1,6 +1,7 @@
 ;;; Simple Util for list manipulation. Basic tools used by route.lisp mostly.
 
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 ;; Simple list utils
 ;; --------------------

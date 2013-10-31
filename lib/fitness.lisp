@@ -1,6 +1,7 @@
 ;;; Fitness functions for each type of problem
 ;;; -----------------------------------------
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 (defparameter *unserved-penalty* 1000)
 

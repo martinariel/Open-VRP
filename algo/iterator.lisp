@@ -1,7 +1,7 @@
 ;; Iterator framework -- Search-heuristic framework used by Tabu-Search
 ;; --------------------------------------------
 (in-package :open-vrp.algo)
-
+(declaim (optimize speed))
 
 ;; initializer
 ;; -----------------

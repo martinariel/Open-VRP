@@ -1,4 +1,5 @@
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 ;; Simple utils from Paul Graham's Onlisp
 ;; -------------------------------

@@ -7,6 +7,7 @@
 ;;; 4. iterate
 
 (in-package :open-vrp.algo)
+(declaim (optimize speed))
 
 (defmethod run-algo ((prob problem) (ts tabu-search))
   "Initialize (if necessary), iterate till finished. Returns <Algo> object."

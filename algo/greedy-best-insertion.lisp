@@ -5,6 +5,7 @@
 ;;; Tabu Search. Randomizing the sequence assures a broad search space when using multi-run
 
 (in-package :open-vrp.algo)
+(declaim (optimize speed))
 
 (defclass greedy-best-insertion (algo)
   ((name :initform "Greedy Best Insertion heuristic")

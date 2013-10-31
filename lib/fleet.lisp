@@ -9,6 +9,7 @@
 ;;; - vehicle (<problem> keyword)              - returns <Vehicle> with id
 
 (in-package :open-vrp.util)
+(declaim (optimize speed))
 
 (defgeneric route-indices (obj)
   (:method (vehicle) "Input is not a <vehicle>/<problem> object!")
