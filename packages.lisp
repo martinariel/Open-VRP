@@ -107,6 +107,7 @@
    :sethash
    :alist-to-hash
    :distance
+   :closest-between
    :node
    :visit-node
 

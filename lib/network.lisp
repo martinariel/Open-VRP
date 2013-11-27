@@ -32,6 +32,21 @@
              it
              (error 'distance-between-nodes-undefined :from from :to to)))))
 
+(defun closest-between (from to dist-matrix)
+  "Given two location IDs, return a third location X which results in the shortest distance from->X + X->to -- to be used to find the best break locations"
+  (labels ((iter (node best-dist rest)
+             (let ((x (car rest)))
+               (cond ((null rest) (values node best-dist))
+                     ((or (eq x from)
+                          (eq x to))
+                      (iter node best-dist (cdr rest)))
+                     (t (let ((dist (+ (distance from x dist-matrix)
+                                       (distance x to dist-matrix))))
+                          (if (or (null best-dist) (< dist best-dist))
+                              (iter x dist (cdr rest))
+                              (iter node best-dist (cdr rest)))))))))
+    (iter nil nil (loop for node-id being the hash-keys of dist-matrix collect node-id))))
+
 ;; -------------------------
 
 ;; Accessor functions
