@@ -238,8 +238,6 @@
         :open-vrp.algo)
   (:import-from	:alexandria :shuffle :flatten :with-gensyms)
   (:export :define-problem
-           :load-testcase-Solomon
-           :load-tsplib-vrp-file
            :multi-run-algo
            :solve-prob
            :iterate-more
@@ -258,6 +256,8 @@
            :greedy-best-insertion))
 
            ;; demos
+           ;; :load-testcase-Solomon
+           ;; :load-tsplib-vrp-file
            ;; :test-tsp
            ;; :test-vrp
            ;; :solomon25
