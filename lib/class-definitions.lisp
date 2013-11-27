@@ -27,7 +27,9 @@
   (demand 0 :type fixnum :read-only t))
 
 (defstruct (pitstop (:include visit))
-  "Location that a break/pitstop may be taken at")
+  "Location that represents a break/pitstop"
+  (node-id :type symbol)
+  (break-type :type string))
 
 ;; --------------------------
 
@@ -86,6 +88,10 @@
 (defclass CVRPTW (CVRP VRPTW)
   ((name :initform "CVRPTW")
    (desc :initform "Capacitated Vehicle Routing Problem with Time Windows")))
+
+(defclass BVRPTW (VRPTW)
+  ((name :initform "BVRPTW")
+   (desc :initform "VRPTW with meal breaks and short breaks")))
 
 ;; ----------------------
 
