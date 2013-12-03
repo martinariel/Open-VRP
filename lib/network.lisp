@@ -32,14 +32,14 @@
              it
              (error 'distance-between-nodes-undefined :from from :to to)))))
 
-(defun closest-between (from to dist-matrix)
-  "Given two location IDs, return a third location X which results in the shortest distance from->X + X->to -- to be used to find the best break locations"
-  (labels ((iter (node best-dist rest)
+(defun closest-between (from to dist-matrix &optional allowed-nodes)
+  "Given two location IDs, return a third location X which results in the shortest distance from->X + X->to -- to be used to find the best break locations. Only consider X from allowed-nodes subset if provided"  (labels ((iter (node best-dist rest)
              (let ((x (car rest)))
                (cond ((null rest) (values node best-dist))
                      ((or (eq x from)
-                          (eq x to))
-                      (iter node best-dist (cdr rest)))
+                          (eq x to)
+                          (and allowed-nodes (not (member x allowed-nodes)))) ; x not in allowed-nodes
+                      (iter node best-dist (cdr rest))) ; skip x
                      (t (let ((dist (+ (distance from x dist-matrix)
                                        (distance x to dist-matrix))))
                           (if (or (null best-dist) (< dist best-dist))
