@@ -12,6 +12,7 @@
            :CVRP
            :VRPTW
            :CVRPTW
+           :BVRPTW
 
            ;; algo
            :algo
@@ -41,6 +42,9 @@
            :visit-duration
            :order-demand
 
+           :pitstop-break-location
+           :pitstop-break-type
+
            :vehicle-id
            :vehicle-route
            :vehicle-capacity
@@ -49,6 +53,9 @@
            :vehicle-end-location
            :vehicle-shift-start
            :vehicle-shift-end
+           :vehicle-break-start
+           :vehicle-break-end
+           :vehicle-break-duration
 
            :problem-name
            :problem-desc
@@ -60,6 +67,7 @@
            :problem-unserved
            :problem-log-file
            :problem-log-mode
+           :problem-break-locations
 
            :algo-name
            :algo-desc

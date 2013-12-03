@@ -28,8 +28,8 @@
 
 (defstruct (pitstop (:include visit))
   "Location that represents a break/pitstop"
-  (node-id :type symbol)
-  (break-type :type string))
+  (break-type "short" :type string)
+  (break-location (gensym) :type symbol))
 
 ;; --------------------------
 
@@ -45,12 +45,13 @@
   (speed 1 :type number :read-only t)
   (shift-start +min-time+ :type fixnum :read-only t)
   (shift-end +max-time+ :type fixnum :read-only t)
-  capacity)
+  capacity
+  (break-start 1100 :type fixnum :read-only t)
+  (break-end 1400 :type fixnum :read-only t)
+  (break-duration 100 :type fixnum :read-only t))
+
 
   ;; Todo:
-  ;; (break-start 1100 :type fixnum :read-only t)
-  ;; (break-start 1400 :type fixnum :read-only t)
-  ;; (break-duration 100 :type fixnum :read-only t)
   ;; type
 
 ;; ----------------------------
@@ -89,9 +90,10 @@
   ((name :initform "CVRPTW")
    (desc :initform "Capacitated Vehicle Routing Problem with Time Windows")))
 
-(defclass BVRPTW (VRPTW)
+(defclass BVRPTW (problem)
   ((name :initform "BVRPTW")
-   (desc :initform "VRPTW with meal breaks and short breaks")))
+   (desc :initform "VRPTW with meal breaks and short breaks")
+   (break-locations :initarg :break-locations :accessor problem-break-locations)))
 
 ;; ----------------------
 
