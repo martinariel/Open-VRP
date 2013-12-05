@@ -24,3 +24,15 @@
                   (error 'no-initial-feasible-solution :data p))))
        finally (init-algo p a)
          (return a))))
+
+(defmethod run-algo ((p bvrptw) (a greedy-best-insertion))
+  "Initializes break locations and Randomly insert <Nodes> one by one to best <vehicle> in best location. Returns <Algo> object when done."
+  ;; Initialize all lunch breaks
+  (loop for veh in (problem-fleet p)
+     do (setf (vehicle-route veh) (list (make-pitstop
+                                         :break-type "long"
+                                         :node-id :break
+                                         :start (vehicle-break-start veh)
+                                         :end (vehicle-break-end veh)
+                                         :duration (vehicle-break-duration veh)))))
+  (call-next-method))
