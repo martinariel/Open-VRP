@@ -14,4 +14,5 @@
                          (:file "greedy-best-insertion")
                          (:file "TS-classdef")
                          (:file "TS-utils")
-                         (:file "TS")))))
+                         (:file "TS")
+                         (:file "breaks")))))

@@ -17,4 +17,6 @@
                          (:file "algo-best-insertion")
                          (:file "greedy-best-insertion")
                          (:file "tabu-search-utils")
-                         (:file "tabu-search")))))
+                         (:file "tabu-search")
+                         (:file "util-breaks")
+                         (:file "algo-breaks")))))
