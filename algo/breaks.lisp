@@ -47,7 +47,7 @@
 
       If node-before is a pitstop:
         - subtract node-before -> current pitstop
-        - subtract current pitstop -> node-after-pitstop
+        - subtract current pitstop -> node-before-pitstop
         - add location X -> node-after
         - update pitstop location with closest-between node-before-pitstop and X
         - ^ will return detour distance"
@@ -73,12 +73,28 @@
                     (dist-to-new (distance node-before-id node-id dist-matrix))) ;add
                (multiple-value-bind (loc dist-detour)
                    (closest-between node-id node-after-pit dist-matrix (problem-break-locations sol))
+                   (declare (ignore loc))
                  (setf (move-fitness m)
                        (handler-case
                            (- (+ dist-detour dist-to-new)
                               (+ dist-to-pit dist-from-pit))
                          (distance-between-nodes-undefined () nil))))))
-            ((pitstop-p node-before) :todo)
+            ((pitstop-p node-before)
+             (let* ((pit (pitstop-break-location node-before))
+                    (node-before-pit (if (= index 1)
+                                         (vehicle-start-location veh)
+                                         (visit-node-id (nth (- index 2) route))))
+                    (dist-to-pit (distance node-before-pit pit dist-matrix)) ;subtract
+                    (dist-from-pit (distance pit node-after dist-matrix)) ;subtract
+                    (dist-to-new (distance node-id node-after dist-matrix))) ;add
+               (multiple-value-bind (loc dist-detour)
+                   (closest-between node-before-pit node-id dist-matrix (problem-break-locations sol))
+                   (declare (ignore loc))
+                 (setf (move-fitness m)
+                       (handler-case
+                           (- (+ dist-detour dist-to-new)
+                              (+ dist-to-pit dist-from-pit))
+                         (distance-between-nodes-undefined () nil))))))
             (t (setf (move-fitness m)
                      (handler-case
                          (-
