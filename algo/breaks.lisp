@@ -31,6 +31,9 @@
                               (1- i)))))))
         (iter route (vehicle-shift-start v) (vehicle-start-location v) index)))))
 
+                       ;; (progn
+                       ;;   (format t "Route: ~A~% Loc: ~A~% To: ~A~% Time: ~A~% Arr-time: ~A~% Node-start: ~A~% Node-end: ~A~% Duration: ~A~% ins-node-end: ~A~% i: ~A~%" (mapcar #'visit-node-id route) loc (visit-node-id to) time arr-time (visit-start to) (visit-end to) (visit-duration to) (visit-end ins-node) i)
+
 
 (defmethod assess-move ((sol bvrptw) (m insertion-move))
   "BVRPTW specific assess-move for insertions, which updates the break location if it is being inserted next to it.
