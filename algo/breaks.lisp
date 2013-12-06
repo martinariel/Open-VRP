@@ -85,11 +85,15 @@
                                          (vehicle-start-location veh)
                                          (visit-node-id (nth (- index 2) route))))
                     (dist-to-pit (distance node-before-pit pit dist-matrix)) ;subtract
-                    (dist-from-pit (distance pit node-after dist-matrix)) ;subtract
-                    (dist-to-new (distance node-id node-after dist-matrix))) ;add
+                    (dist-from-pit (distance pit node-after-id dist-matrix)) ;subtract
+                    (dist-to-new (distance node-id node-after-id dist-matrix))) ;add
+               ;; (format t "pit: ~A~% node-before-pit: ~A~% dist-to-pit: ~A~% dist-from-pit: ~A~% dist-to-new:~A" pit node-before-pit dist-to-pit dist-from-pit dist-to-new)
                (multiple-value-bind (loc dist-detour)
                    (closest-between node-before-pit node-id dist-matrix (problem-break-locations sol))
                    (declare (ignore loc))
+                 ;; (format t "loc: ~A~% dist-detour: ~A~%" loc dist-detour)
+                 ;; (print (- (+ dist-detour dist-to-new)
+                 ;;              (+ dist-to-pit dist-from-pit)))
                  (setf (move-fitness m)
                        (handler-case
                            (- (+ dist-detour dist-to-new)
