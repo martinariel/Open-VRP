@@ -136,4 +136,4 @@
                  (setf (pitstop-break-location node-before)
                        (closest-between node-before-pit node-id dist-matrix (problem-break-locations sol)))
                  (call-next-method)))
-              (t (call-next-method))))))))
+              (t (call-next-method)))))))
