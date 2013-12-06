@@ -41,4 +41,14 @@
 
     (assert-equal 9 (assess-move bvrptw (make-insertion-move :node-id :o5 :vehicle-id :t3 :index 0)))
     (assert-equal 7 (assess-move bvrptw (make-insertion-move :node-id :o5 :vehicle-id :t3 :index 1)))
-    (assert-equal 5 (assess-move bvrptw (make-insertion-move :node-id :o5 :vehicle-id :t3 :index 2)))))
+    (assert-equal 5 (assess-move bvrptw (make-insertion-move :node-id :o5 :vehicle-id :t3 :index 2)))
+
+    ;; Perform moves
+    (assert-equal '(:A :b1 :B) (route-indices t1))
+    (assert-equal :o5 (pitstop-break-location (nth 0 (vehicle-route t1))))
+    (perform-move bvrptw (make-insertion-move :node-id :o1 :vehicle-id :t1 :index 0))
+    (assert-equal '(:A :o1 :b1 :B) (route-indices t1))
+    (assert-equal :o3 (pitstop-break-location (nth 1 (vehicle-route t1))))
+    (perform-move bvrptw (make-insertion-move :node-id :o3 :vehicle-id :t1 :index 1))
+    (assert-equal '(:A :o1 :o3 :b1 :B) (route-indices t1))
+    (assert-equal :o5 (pitstop-break-location (nth 2 (vehicle-route t1))))))
