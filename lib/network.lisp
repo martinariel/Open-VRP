@@ -36,7 +36,9 @@
   "Given two location IDs, return a third location X (with best-distance of detour) which results in the shortest distance from->X + X->to -- to be used to find the best break locations. Only consider X from allowed-nodes subset if provided"
   (labels ((iter (node best-dist rest)
              (let ((x (car rest)))
-               (cond ((null rest) (values node best-dist))
+               (cond ((null rest)
+                      (unless node (error "No break locations!"))
+                      (values node best-dist))
                      ((or (eq x from)
                           (eq x to)
                           (and allowed-nodes (not (member x allowed-nodes)))) ; x not in allowed-nodes

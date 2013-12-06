@@ -49,6 +49,10 @@
     (perform-move bvrptw (make-insertion-move :node-id :o1 :vehicle-id :t1 :index 0))
     (assert-equal '(:A :o1 :b1 :B) (route-indices t1))
     (assert-equal :o3 (pitstop-break-location (nth 1 (vehicle-route t1))))
+    (assert-equal 3 (assess-move bvrptw (make-insertion-move :node-id :o3 :vehicle-id :t1 :index 1)))
     (perform-move bvrptw (make-insertion-move :node-id :o3 :vehicle-id :t1 :index 1))
     (assert-equal '(:A :o1 :o3 :b1 :B) (route-indices t1))
-    (assert-equal :o5 (pitstop-break-location (nth 2 (vehicle-route t1))))))
+    (assert-equal :o5 (pitstop-break-location (nth 2 (vehicle-route t1))))
+    ;; Cannot perform this move, because there is no more break locations -- does not perform
+    (assert-equal nil (assess-move bvrptw (make-insertion-move :node-id :o5 :vehicle-id :t1 :index 3)))
+    (assert-error 'simple-error (perform-move bvrptw (make-insertion-move :node-id :o5 :vehicle-id :t1 :index 3)))))
