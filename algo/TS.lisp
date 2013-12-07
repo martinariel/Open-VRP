@@ -79,7 +79,7 @@
                 (setf fitness (- (insertion-cost vehicle-id node-id) *unserved-penalty*))
                 (let* ((dist-matrix (problem-dist-matrix sol))
                        (veh (vehicle sol v-w-n-id))
-                       (route (route-indices veh))
+                       (route (route-indices-with-breaks veh))
                        (pos (position node-id route))
                        (node-before (if (= pos 0) (vehicle-start-location veh) (nth (1- pos) route)))
                        (dist-before (distance node-before node-id dist-matrix)))

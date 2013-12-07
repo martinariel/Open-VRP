@@ -34,5 +34,6 @@
                                          :node-id :break
                                          :start (vehicle-break-start veh)
                                          :end (vehicle-break-end veh)
-                                         :duration (vehicle-break-duration veh)))))
+                                         :duration (vehicle-break-duration veh)
+                                         :break-location (car (problem-break-locations p))))))
   (call-next-method))

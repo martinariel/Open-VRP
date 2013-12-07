@@ -13,7 +13,7 @@
       (format stream "~&Fitness unknown; missing distance matrix!"))
   (format stream "~&---------------")
   (dolist (busy-veh (get-busy-vehicles prob))
-    (format stream "~&[~5@A]: ~A~%" (vehicle-id busy-veh) (route-indices busy-veh)))
+    (format stream "~&[~5@A]: ~A~%" (vehicle-id busy-veh) (route-indices-for-print busy-veh)))
   (format stream "~&---------------~%")
   (when (problem-allow-unserved prob)
     (format stream "~&Unserved: ~A" (problem-unserved prob))))

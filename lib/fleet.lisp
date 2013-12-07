@@ -26,6 +26,28 @@
 (defmethod route-indices ((p problem))
   (mapcar #'route-indices (problem-fleet p)))
 
+(defun route-indices-with-breaks (veh)
+  "Special route-indices method to return break-locations, instead of :BREAK node-id"
+  (check-type veh vehicle)
+  (nconc (list (vehicle-start-location veh))
+         (mapcar #'(lambda (node)
+                     (if (pitstop-p node)
+                         (pitstop-break-location node)
+                         (visit-node-id node)))
+                 (vehicle-route veh))
+         (list (vehicle-end-location veh))))
+
+(defun route-indices-for-print (veh)
+  "Special route-indices method to return break-locations with break node-id"
+  (check-type veh vehicle)
+  (nconc (list (vehicle-start-location veh))
+         (mapcar #'(lambda (node)
+                     (if (pitstop-p node)
+                         (format nil "~A@~A" (visit-node-id node) (pitstop-break-location node))
+                         (visit-node-id node)))
+                 (vehicle-route veh))
+         (list (vehicle-end-location veh))))
+
 (defun node-on-route-p (node-id vehicle)
   "Returns NIL if <vehicle> does not have the node on its route."
   (check-type node-id symbol)
@@ -56,10 +78,12 @@
                  (iter (cdr togo)
                        (+ sum
                           (distance (car togo)
-                                        (cadr togo)
-                                        dist-matrix))))))
+                                    (cadr togo)
+                                    dist-matrix))))))
     ;; Insert start and end-locations into route
-    (iter (route-indices veh) 0)))
+    (iter (if (vehicle-break-duration veh)
+              (route-indices-with-breaks veh) ;; todo
+              (route-indices veh)) 0)))
 
 
 (defun total-dist (problem)

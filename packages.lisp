@@ -121,6 +121,7 @@
 
    ;; fleet utils
    :route-indices
+   :route-indices-with-breaks
    :vehicle-with-node-id
    :node-on-route-p
    :route-dist
