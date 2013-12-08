@@ -35,6 +35,9 @@
            (loop for node-id being the hash-keys of (problem-visits prob)
                 for veh-w-node-id = (vehicle-with-node-id prob node-id)
               unless (or
+                      ;; Disable intra-route moves (for bvrptw -- too complex!)
+                      (and (eq (type-of prob) 'bvrptw)
+                           (eq veh-w-node-id veh-id))
                       ;; Do not generate moves that are not changing anything
                       (and (one-destination-p (vehicle-route veh))
                            (eq (cadr (route-indices veh)) node-id))
