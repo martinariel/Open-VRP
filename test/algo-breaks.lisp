@@ -79,5 +79,10 @@
                                 :break-locations '(:o5 :o3)
                                 :dist-matrix dist
                                 :visits {:o1 o1 :o2 o2 :o3 o3 :o4 o4}))
-         (init-sol (solve-prob bvrptw (make-instance 'greedy-best-insertion))))
-    (assert-true (< (algo-best-fitness init-sol) 100))))
+         (init-sol (solve-prob bvrptw (make-instance 'greedy-best-insertion)))
+         (ts (solve-prob bvrptw (make-instance 'tabu-search))))
+    (assert-true (< (algo-best-fitness init-sol) 100))
+    (assert-equal 8 (length (generate-moves ts)))
+    (assert-equal 12 (algo-best-fitness ts))
+    (assert-equal '((:A :BREAK :O2 :O1 :A) (:B :BREAK :O4 :O3 :B))
+                  (route-indices (algo-best-sol ts)))))
