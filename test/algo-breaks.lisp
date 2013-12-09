@@ -91,7 +91,15 @@
     (assert-equal 0 (assess-move bvrptw move-normal))
     (assert-equal 1000 (assess-move bvrptw move-unserved))
     (assert-equal 1000 (assess-move bvrptw move-unserved-2))
-    (assert-equal 1003 (assess-move bvrptw move-unserved-3))))
+    (assert-equal 1003 (assess-move bvrptw move-unserved-3))
+    (assert-equal '(:A :o4 "B1@O5" :B) (open-vrp.util::route-indices-for-print t1))
+    (assert-equal '(:A :o1 "B2@O3" :o2 :o3 :B) (open-vrp.util::route-indices-for-print t2))
+    (perform-move bvrptw move-a)
+    (assert-equal '(:A :o2 :o4 "B1@O5" :B) (open-vrp.util::route-indices-for-print t1))
+    (assert-equal '(:A :o1 "B2@O5" :o3 :B) (open-vrp.util::route-indices-for-print t2))
+    (perform-move bvrptw move-b)
+    (assert-equal '(:A :o2 "B1@O3" :B) (open-vrp.util::route-indices-for-print t1))
+    (assert-equal '(:A :o1 "B2@O3" :o4 :o3 :B) (open-vrp.util::route-indices-for-print t2))))
 
 (define-test tabu-search-with-breaks
   (:tag :break-algo)
