@@ -65,9 +65,9 @@
          (o3 (make-order :duration 3 :start 10 :end 25 :node-id :o3))
          (o4 (make-order :duration 4 :start 10 :end 20 :node-id :o4))
          (o5 (make-order :duration 5 :start 0 :end 15 :node-id :o5))
-         (b1 (make-pitstop :duration 5 :start 10 :end 15 :node-id :b1 :break-type "long" :break-location :o5))
+         (b1 (make-pitstop :duration 5 :start 10 :end 25 :node-id :b1 :break-type "long" :break-location :o5))
          (b2 (make-pitstop :duration 5 :start 10 :end 25 :node-id :b2 :break-type "long" :break-location :o3))
-         (t1 (make-vehicle :id :t1 :route (list o4 b1) :start-location :A :end-location :B :shift-end 25))
+         (t1 (make-vehicle :id :t1 :route (list o4 b1) :start-location :A :end-location :B :shift-end 26))
          (t2 (make-vehicle :id :t2 :route (list o1 b2 o2 o3) :start-location :A :end-location :B :shift-start 0 :shift-end 30))
          (dist {:o1 {      :o2 1 :o3 2 :o4 3 :o5 5 :A 1 :B 4}
                 :o2 {:o1 1       :o3 1 :o4 2 :o5 4 :A 2 :B 3}
@@ -80,10 +80,12 @@
                                 :break-locations '(:o5 :o3)
                                 :dist-matrix dist
                                 :visits {:o1 o1 :o2 o2 :o3 o3 :o4 o4 :o5 o5}))
-         (move (make-TS-best-insertion-move :node-id :o2 :vehicle-id :t1))
-         (move2 (make-TS-best-insertion-move :node-id :o4 :vehicle-id :t2)))
-    (assert-equal 3 (assess-move bvrptw move))
-    (assert-equal 0 (assess-move bvrptw move2))))
+         (move-a (make-TS-best-insertion-move :node-id :o2 :vehicle-id :t1))
+         (move-b (make-TS-best-insertion-move :node-id :o4 :vehicle-id :t2))
+         (move-normal (make-TS-best-insertion-move :node-id :o3 :vehicle-id :t1)))
+    (assert-equal 3 (assess-move bvrptw move-a))
+    (assert-equal 0 (assess-move bvrptw move-b))
+    (assert-equal 0 (assess-move bvrptw move-normal))))
 
 (define-test tabu-search-with-breaks
   (:tag :break-algo)

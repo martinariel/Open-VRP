@@ -222,7 +222,6 @@
                                              dist-after))
                                      (distance-between-nodes-undefined () nil))))))
                         (t
-                         (print "check")
                                         ; By default, just calculate savings:
                                         ; [1 - 2 - 3]
                                         ; subtract 1-2 and 2-3
