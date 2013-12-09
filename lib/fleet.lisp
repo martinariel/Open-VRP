@@ -98,12 +98,19 @@
                                  (push
                                   (cons (+ time (travel-time loc (vehicle-end-location veh) dist-matrix :speed (vehicle-speed veh))) nil)
                                   times))
-                   (let* ((arr-time (+ time (travel-time loc (visit-node-id (car route)) dist-matrix :speed (vehicle-speed veh))))
-                          (finish-time (time-after-visit (car route) arr-time)))
+                   (let* ((node (car route))
+                          (arr-time (+ time (travel-time loc
+                                                         (if (pitstop-p node)
+                                                             (pitstop-break-location node)
+                                                             (visit-node-id node))
+                                                         dist-matrix :speed (vehicle-speed veh))))
+                          (finish-time (time-after-visit node arr-time)))
                      (push (cons arr-time finish-time) times)
                      (iter (cdr route)
                            finish-time
-                           (visit-node-id (car route)))))))
+                           (if (pitstop-p node)
+                               (pitstop-break-location node)
+                               (visit-node-id node)))))))
       (iter (vehicle-route veh)
             (vehicle-shift-start veh)
             (vehicle-start-location veh)))))
