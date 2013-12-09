@@ -84,12 +84,14 @@
          (move-b (make-TS-best-insertion-move :node-id :o4 :vehicle-id :t2))
          (move-normal (make-TS-best-insertion-move :node-id :o3 :vehicle-id :t1))
          (move-unserved (make-TS-best-insertion-move :node-id :o3 :vehicle-id :UNSERVED))
-         (move-unserved-2 (make-TS-best-insertion-move :node-id :o1 :vehicle-id :UNSERVED)))
+         (move-unserved-2 (make-TS-best-insertion-move :node-id :o1 :vehicle-id :UNSERVED))
+         (move-unserved-3 (make-TS-best-insertion-move :node-id :o2 :vehicle-id :UNSERVED)))
     (assert-equal 3 (assess-move bvrptw move-a))
     (assert-equal 0 (assess-move bvrptw move-b))
     (assert-equal 0 (assess-move bvrptw move-normal))
     (assert-equal 1000 (assess-move bvrptw move-unserved))
-    (assert-equal 1000 (assess-move bvrptw move-unserved-2))))
+    (assert-equal 1000 (assess-move bvrptw move-unserved-2))
+    (assert-equal 1003 (assess-move bvrptw move-unserved-3))))
 
 (define-test tabu-search-with-breaks
   (:tag :break-algo)
