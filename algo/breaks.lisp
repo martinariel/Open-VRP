@@ -173,13 +173,16 @@
                                 (dist-before (distance node-before node-id dist-matrix)) ;subtract
                                 (dist-to-pit (distance node-id pit dist-matrix)) ;subtract
                                 (dist-from-pit (distance pit node-after-pit dist-matrix))) ;subtract
+                           ;; (format t "pit: ~A~% node-after-pit: ~A~% dist-to-pit: ~A~% dist-from-pit: ~A~% dist-before:~A~%" pit node-after-pit dist-to-pit dist-from-pit dist-before)
                            (multiple-value-bind (loc dist-detour)
                                (closest-between node-before node-after-pit dist-matrix (problem-break-locations sol))
                              (declare (ignore loc))
+                             ;; (format t "loc: ~A~% dist-detour: ~A~%" loc dist-detour)
+                             ;; (print (insertion-cost vehicle-id node-id))
                              (setf fitness
                                    (handler-case
-                                       (- (insertion-cost vehicle-id node-id)
-                                        ;save by removing:
+                                       (+ (insertion-cost vehicle-id node-id)
+                                        ;cost of removing:
                                           (- dist-detour ;   new B between 0 and 2
                                              dist-before ;   0-1
                                              dist-to-pit ;   1-B
@@ -219,6 +222,7 @@
                                              dist-after))
                                      (distance-between-nodes-undefined () nil))))))
                         (t
+                         (print "check")
                                         ; By default, just calculate savings:
                                         ; [1 - 2 - 3]
                                         ; subtract 1-2 and 2-3

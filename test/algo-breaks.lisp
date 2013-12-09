@@ -80,8 +80,10 @@
                                 :break-locations '(:o5 :o3)
                                 :dist-matrix dist
                                 :visits {:o1 o1 :o2 o2 :o3 o3 :o4 o4 :o5 o5}))
-         (move (make-TS-best-insertion-move :node-id :o2 :vehicle-id :t1)))
-    (assert-equal 3 (assess-move bvrptw move))))
+         (move (make-TS-best-insertion-move :node-id :o2 :vehicle-id :t1))
+         (move2 (make-TS-best-insertion-move :node-id :o4 :vehicle-id :t2)))
+    (assert-equal 3 (assess-move bvrptw move))
+    (assert-equal 0 (assess-move bvrptw move2))))
 
 (define-test tabu-search-with-breaks
   (:tag :break-algo)
