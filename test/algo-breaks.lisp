@@ -82,10 +82,14 @@
                                 :visits {:o1 o1 :o2 o2 :o3 o3 :o4 o4 :o5 o5}))
          (move-a (make-TS-best-insertion-move :node-id :o2 :vehicle-id :t1))
          (move-b (make-TS-best-insertion-move :node-id :o4 :vehicle-id :t2))
-         (move-normal (make-TS-best-insertion-move :node-id :o3 :vehicle-id :t1)))
+         (move-normal (make-TS-best-insertion-move :node-id :o3 :vehicle-id :t1))
+         (move-unserved (make-TS-best-insertion-move :node-id :o3 :vehicle-id :UNSERVED))
+         (move-unserved-2 (make-TS-best-insertion-move :node-id :o1 :vehicle-id :UNSERVED)))
     (assert-equal 3 (assess-move bvrptw move-a))
     (assert-equal 0 (assess-move bvrptw move-b))
-    (assert-equal 0 (assess-move bvrptw move-normal))))
+    (assert-equal 0 (assess-move bvrptw move-normal))
+    (assert-equal 1000 (assess-move bvrptw move-unserved))
+    (assert-equal 1000 (assess-move bvrptw move-unserved-2))))
 
 (define-test tabu-search-with-breaks
   (:tag :break-algo)
